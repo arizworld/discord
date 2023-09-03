@@ -1,0 +1,25 @@
+# run the postgress service
+version: "3"
+
+volumes:
+  database-data:
+
+networks:
+  app_network:
+    external: false
+
+services:
+  database:
+    container_name: database
+    image: postgres:14
+    restart: always
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - app_network
+    ports:
+      - 5432:5432
